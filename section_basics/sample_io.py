@@ -1,7 +1,13 @@
 import sys
 import struct
+import argparse
 
-with open(sys.argv[1], 'rb') as f:
+parser = argparse.ArgumentParser(description='Read a PLY file')
+parser.add_argument('filename', type=str, help='PLY file to read')
+
+args = parser.parse_args()
+
+with open(args.filename, 'rb') as f:
     # read header
     while True:
         line = f.readline()
