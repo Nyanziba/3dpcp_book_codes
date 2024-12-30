@@ -2,10 +2,16 @@ import sys
 import struct
 import argparse
 
-parser = argparse.ArgumentParser(description='Read a PLY file')
+parser = argparse.ArgumentParser(description='Read a PLY file')# パーサーの作成　ここのプログラムの説明も持って来れる。
 parser.add_argument('filename', type=str, help='PLY file to read')
 
-args = parser.parse_args()
+# 引数の宣言　ここで、デフォルト値の指定や、型の指定、
+# ヘルプメッセージの指定や、必須引数の指定もできる。
+# 選択肢を追加することもできる。
+
+args = parser.parse_args() #型の解析
+#引数は、parse_args()メソッドを呼び出すことで解析され、
+#パースされた結果がargsに格納される。
 
 with open(args.filename, 'rb') as f:
     # read header
