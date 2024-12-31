@@ -12,6 +12,7 @@ print("R:",np.round(R,7))
 #回転行列を使って、meshを回転させる。こちらは角度。
 R = o3d.geometry.get_rotation_matrix_from_axis_angle([0,np.pi/2,0])
 print("R:",np.round(R,7))
+#クォータニオンを使って回転行列を作成する。open3dはクォータにオンのパラメータは、w,x,y,zの順番。
 R = o3d.geometry.get_rotation_matrix_from_quaternion([np.cos(np.pi/5),0,np.sin(np.pi/5),0])
 print("R:",np.round(R,7))
 mesh_r = copy.deepcopy(mesh)
