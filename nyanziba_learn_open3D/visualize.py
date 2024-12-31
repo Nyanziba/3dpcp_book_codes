@@ -14,9 +14,6 @@ pcd = o3d.io.read_point_cloud(args.filename)
 
 print(pcd)
 print(np.asarray(pcd.points))
-# オフスクリーンレンダリングの設定
-vis = o3d.visualization.Visualizer()
-vis.create_window(visible=False)  
 
 o3d.visualization.draw_geometries([pcd])
 
