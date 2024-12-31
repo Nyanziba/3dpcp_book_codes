@@ -1,6 +1,7 @@
 import sys
 import numpy as np
 import open3d as o3d
+import argparse
 
 def l2_norm(a, b):
     return ((a - b) ** 2).sum(axis=1)
@@ -22,21 +23,21 @@ def farthest_point_sampling(pcd, k, metrics=l2_norm):
     return pcd
 
 # main
-filename = sys.argv[1]
-k = int(sys.argv[2])
+argparse = argparse.ArgumentParser(description='Farthest point sampling')
+argparse.add_argument('filename', type=str, help='Point cloud file to read')
+argparse.add_argument('k', type=int, help='Number of points to downsample')
+args = argparse.parse_args()
+filename = args.filename
+k = args.k
 print("Loading a point cloud from", filename)
 pcd = o3d.io.read_point_cloud(filename)
 print(pcd)
 
-o3d.visualization.draw_geometries([pcd], zoom=0.3412,
-                                  front=[0.4257, -0.2125, -0.8795],
-                                  lookat=[2.6172, 2.0475, 1.532],
-                                  up=[-0.0694, -0.9768, 0.2024])
-
-downpcd = farthest_point_sampling(pcd, k)
+o3d.visualization.draw_geometries([pcd])
+### FPSのdownsamplingが実装されていた。
+###つくチャレのPCL地図は30017214点あるので、
+# FPSでダウンサンプリングすると、とてつもなく時間がかかる。
+downpcd  = pcd.farthest_point_down_sample(k)
 print(downpcd)
 
-o3d.visualization.draw_geometries([downpcd], zoom=0.3412,
-                                  front=[0.4257, -0.2125, -0.8795],
-                                  lookat=[2.6172, 2.0475, 1.532],
-                                  up=[-0.0694, -0.9768, 0.2024])
+o3d.visualization.draw_geometries([downpcd])

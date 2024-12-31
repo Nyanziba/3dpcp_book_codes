@@ -18,8 +18,10 @@ mesh_r.rotate(R, center=[0,0,0])
 # Translate
 t = [0.5, 0.7, 1]
 mesh_t = copy.deepcopy(mesh_r).translate(t)
+
 print ("Type q to continue.")
 o3d.visualization.draw_geometries([mesh, mesh_t])
+
 
 # Rotate and translate
 T = np.eye(4)
@@ -28,6 +30,13 @@ T[:3,3] = t
 mesh_t = copy.deepcopy(mesh).transform(T)
 print ("Type q to continue.")
 o3d.visualization.draw_geometries([mesh, mesh_t])
+
+# Translate and rotate
+mesh_tr = copy.deepcopy(mesh).translate(t).rotate(R, center=[0,0,0])
+mesh_rt = copy.deepcopy(mesh).rotate(R, center=[0,0,0]).translate(t)
+print ("Type q to continue.")
+o3d.visualization.draw_geometries([mesh, mesh_tr])
+o3d.visualization.draw_geometries([mesh, mesh_tr, mesh_rt])
 
 # Scale
 mesh_s = copy.deepcopy(mesh_t)
